@@ -89,7 +89,7 @@ void chat_session::do_write()
             if (!ec)
             {
                 write_msgs_.pop_front();
-                if (!write_msgs_.empty)
+                if (!write_msgs_.empty())
                 {
                     do_write();
                 }
@@ -102,7 +102,7 @@ void chat_session::do_write()
 }
 
 chat_server::chat_server(boost::asio::io_context &io_context,
-                         const tcp::endpoint &endpoint) : acceptor_(io_context)
+                         const tcp::endpoint &endpoint):acceptor_(io_context, endpoint)
 {
     do_accept();
 }
@@ -110,7 +110,7 @@ chat_server::chat_server(boost::asio::io_context &io_context,
 void chat_server::do_accept()
 {
     acceptor_.async_accept(
-        [this](boost::system::error_code ec, tcp::socket socket) {
+        [this](boost::system::error_code &ec, tcp::socket socket) {
             if (!ec)
             {
                 std::make_shared<chat_session>(std::move(socket), room_)->start();

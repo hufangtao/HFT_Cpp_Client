@@ -54,8 +54,7 @@ private:
 class chat_server
 {
 public:
-  chat_server(boost::asio::io_context &io_context,
-              const tcp::endpoint &endpoint);
+  chat_server(boost::asio::io_context &io_context, const tcp::endpoint &endpoint);
 
 private:
   void do_accept();
