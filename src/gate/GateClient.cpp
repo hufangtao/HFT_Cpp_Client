@@ -12,7 +12,6 @@ GateClient::~GateClient()
 {
 }
 
-
 void GateClient::write(const ProtoMessage &msg)
 {
     boost::asio::post(io_context_, [this, msg]() {
