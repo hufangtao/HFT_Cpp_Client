@@ -10,17 +10,12 @@ OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
 OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
 OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 
-INC_DIR		=  -I/usr/include -I/usr/local/include
-INC_DIR		+= -I./ -I./src
+INC_DIR		:= -I./src -I/usr/local/protobuf/include
 
-CFLAGS		:= -std=c++11
-CFLAGS      += -lpthread -lboost_filesystem -lboost_thread -lboost_system
+CFLAGS		:= -pthread 
+CFLAGS		+= -L/usr/local/protobuf/lib -lprotobuf 
 
-LIB_NAME	:= rpc_client
-LIB_SUFFIX	:= .a
-LIB_TARGET	:= lib$(LIB_NAME)$(LIB_SUFFIX)
-
-TARGET		:= HFT_Client
+TARGET		:= HFT_Server
 
 .PHONY		: all clean
 
@@ -31,12 +26,11 @@ $(TARGET): $(OBJ_FILES)
 	@echo **********Build*********
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@ 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@
 %.o: %.cc
-	$(CC) $(CFLAGS) $(INC_DIR) -c $< -o $@
+	$(CC) -c $< $(INC_DIR) -o $@
 
 clean:
-	rm -f $(TARGET) $(OBJ_FILES)
-
+	-rm -f $(TARGET) $(OBJ_FILES)
