@@ -15,7 +15,7 @@ INC_DIR		:= -I./src -I/usr/local/protobuf/include
 CFLAGS		:= -pthread 
 CFLAGS		+= -L/usr/local/protobuf/lib -lprotobuf 
 
-TARGET		:= HFT_Server
+TARGET		:= HFT_Client
 
 .PHONY		: all clean
 
