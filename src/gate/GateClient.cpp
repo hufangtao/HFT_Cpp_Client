@@ -91,6 +91,7 @@ void GateClient::do_write()
         boost::asio::buffer(write_msgs_.front().data(),
                             write_msgs_.front().length()),
         [this](boost::system::error_code ec, std::size_t length) {
+            INFO("write message length?:", length);
             if (!ec)
             {
                 write_msgs_.pop();
