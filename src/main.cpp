@@ -6,6 +6,8 @@
 
 #include "common/proto/Pmd.pb.h"
 #include "common/proto/AccPmd.pb.h"
+
+
 #include "gate/GateClient.h"
 
 int main(int argc, char *argv[])
@@ -33,12 +35,9 @@ int main(int argc, char *argv[])
             loginMsg.set_channel_open_id("86597281346500");
             loginMsg.set_game_account_id("2200000147556");
             loginMsg.set_game_account_sign("qwe168+asd879qw");
-
+            loginMsg.set_channel_param("aaaaa");
             ProtoMessage msg(loginMsg);
-            // msg.body_length(std::strlen(data));
-            // std::memcpy(msg.body(), data, msg.body_length());
-            // msg.encode_header();
-            // c.write(msg);
+            c.write(msg);
         }
         c.close();
         t.join();
