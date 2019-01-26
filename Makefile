@@ -10,6 +10,10 @@ OBJ_FILES	:= $(SRC_FILES_CPP:.cpp=.o)
 OBJ_FILES	+= $(SRC_FILES_C:.c=.o)
 OBJ_FILES	+= $(SRC_FILES_CC:.cc=.o)
 
+PROTO_DIR	:= $(ROOT_DIR)/src/common/protobuf
+PROTO_DEST	:= $(ROOT_DIR)/src/common/proto
+PROTO_FILE	:= $(shell find $(PROTO_DIR) -name '*.proto')
+
 INC_DIR		:= -I./src -I/usr/local/protobuf/include
 
 CFLAGS		:= -pthread 
@@ -34,3 +38,7 @@ $(TARGET): $(OBJ_FILES)
 
 clean:
 	-rm -f $(TARGET) $(OBJ_FILES)
+
+proto: 
+	rm -rf $(PROTO_DEST)/*
+	protoc -I=$(PROTO_DIR) --cpp_out=$(PROTO_DEST) $(PROTO_FILE)
