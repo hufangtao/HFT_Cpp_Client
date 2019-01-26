@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
         char line[ProtoMessage::MAX_BODY_LENGTH + 1];
         while (std::cin.getline(line, ProtoMessage::MAX_BODY_LENGTH))
         {
-            PlatPmd::LoginPmd_C2S loginMsg;
+            PlatPmd::LoginAccPmd_C2S loginMsg;
+            loginMsg.set_platform("1222");
             loginMsg.set_channel_open_id("86597281346500");
             loginMsg.set_game_account_id("2200000147556");
             loginMsg.set_game_account_sign("qwe168+asd879qw");
